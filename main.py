@@ -90,7 +90,7 @@ if (args.testOnly):
     print('\n[Test Phase] : Model setup')
     assert os.path.isdir('checkpoint'), 'Error: No checkpoint directory found!'
     _, file_name = getNetwork(args)
-    checkpoint = torch.load('./checkpoint/'+args.dataset+os.sep+file_name+'.t7')
+    checkpoint = torch.load('./checkpoint/'+args.dataset+os.sep+file_name+'.pth')
     net = checkpoint['net']
 
     if use_cuda:
@@ -127,7 +127,7 @@ if args.resume:
     print('| Resuming from checkpoint...')
     assert os.path.isdir('checkpoint'), 'Error: No checkpoint directory found!'
     _, file_name = getNetwork(args)
-    checkpoint = torch.load('./checkpoint/'+args.dataset+os.sep+file_name+'.t7')
+    checkpoint = torch.load('./checkpoint/'+args.dataset+os.sep+file_name+'.pth')
     net = checkpoint['net']
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
@@ -210,7 +210,7 @@ def test(epoch):
             save_point = './checkpoint/'+args.dataset+os.sep
             if not os.path.isdir(save_point):
                 os.mkdir(save_point)
-            torch.save(state, save_point+file_name+'.t7')
+            torch.save(state, save_point+file_name+'.pth')
             best_acc = acc
 
 print('\n[Phase 3] : Training model')
